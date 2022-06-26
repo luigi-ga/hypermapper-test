@@ -1,0 +1,106 @@
+{
+    "models": {
+        "model": "random_forest"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 150,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 13
+    },
+    "resume_optimization": false,
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x3": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x4": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x5": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x6": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x7": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x8": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x9": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x10": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x11": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x12": {
+            "parameter_type": "real",
+            "values": [
+                -2,
+                2
+            ]
+        }
+    },
+    "application_name": "RF_Ackley",
+    "acquisition_function": "EI",
+    "output_data_file": "real/Ackley/RF_Ackley/dim12/RF_Ackley_output_samples_3.csv",
+    "output_pareto_file": "real/Ackley/RF_Ackley/dim12/RF_output_pareto_dim12.csv",
+    "resume_optimization_data": "real/"
+}

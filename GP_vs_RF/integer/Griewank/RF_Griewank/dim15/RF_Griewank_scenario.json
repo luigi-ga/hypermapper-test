@@ -1,0 +1,127 @@
+{
+    "models": {
+        "model": "random_forest"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 150,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 16
+    },
+    "resume_optimization": false,
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x2": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x3": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x4": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x5": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x6": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x7": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x8": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x9": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x10": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x11": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x12": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x13": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x14": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        },
+        "x15": {
+            "parameter_type": "integer",
+            "values": [
+                -2,
+                2
+            ]
+        }
+    },
+    "application_name": "RF_Griewank",
+    "acquisition_function": "EI",
+    "output_data_file": "integer/Griewank/RF_Griewank/dim15/RF_Griewank_output_samples_4.csv",
+    "output_pareto_file": "integer/Griewank/RF_Griewank/dim15/RF_output_pareto_dim15.csv",
+    "resume_optimization_data": "integer/Rastrigin/RF_Rastrigin/dim8/RF_Rastrigin_output_samples_4.csv"
+}

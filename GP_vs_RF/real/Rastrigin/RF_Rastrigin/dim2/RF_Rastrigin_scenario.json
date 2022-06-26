@@ -1,0 +1,36 @@
+{
+    "models": {
+        "model": "random_forest"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 40,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 3
+    },
+    "resume_optimization": false,
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -1,
+                1
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                -1,
+                1
+            ]
+        }
+    },
+    "application_name": "RF_Rastrigin",
+    "acquisition_function": "EI",
+    "output_data_file": "real/Rastrigin/RF_Rastrigin/dim2/RF_Rastrigin_output_samples_4.csv",
+    "output_pareto_file": "real/Rastrigin/RF_Rastrigin/dim2/RF_output_pareto_dim2.csv",
+    "resume_optimization_data": "real/"
+}

@@ -1,0 +1,78 @@
+{
+    "models": {
+        "model": "random_forest"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 100,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 9
+    },
+    "resume_optimization": false,
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x3": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x4": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x5": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x6": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x7": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x8": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        }
+    },
+    "application_name": "RF_Schwefel",
+    "acquisition_function": "EI",
+    "output_data_file": "real/Schwefel/RF_Schwefel/dim8/RF_Schwefel_output_samples_3.csv",
+    "output_pareto_file": "real/Schwefel/RF_Schwefel/dim8/RF_output_pareto_dim8.csv",
+    "resume_optimization_data": "real/"
+}

@@ -1,0 +1,109 @@
+{
+    "application_name": "RF_Ackley",
+    "models": {
+        "model": "random_forest",
+        "number_of_trees": 2,
+        "max_features": 0.8502851303882956,
+        "bootstrap": true,
+        "min_samples_split": 2
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 200,
+    "time_budget": 30,
+    "noise": true,
+    "normalize_inputs": true,
+    "output_data_file": "Tests/Ackley/test10/Ackley_output_samples.csv",
+    "resume_optimization": false,
+    "resume_optimization_data": "Tests/Ackley/test10/Ackley_output_samples.csv",
+    "design_of_experiment": {
+        "number_of_samples": 13
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x3": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x4": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x5": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x6": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x7": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x8": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x9": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x10": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x11": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x12": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        }
+    }
+}

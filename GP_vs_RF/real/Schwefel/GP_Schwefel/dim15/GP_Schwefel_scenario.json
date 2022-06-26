@@ -1,0 +1,127 @@
+{
+    "models": {
+        "model": "gaussian_process"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 200,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 16
+    },
+    "resume_optimization": false,
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x3": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x4": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x5": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x6": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x7": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x8": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x9": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x10": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x11": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x12": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x13": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x14": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        },
+        "x15": {
+            "parameter_type": "real",
+            "values": [
+                0,
+                500
+            ]
+        }
+    },
+    "application_name": "GP_Schwefel",
+    "acquisition_function": "EI",
+    "output_data_file": "real/Schwefel/GP_Schwefel/dim15/GP_Schwefel_output_samples_3.csv",
+    "output_pareto_file": "real/Schwefel/GP_Schwefel/dim15/GP_output_pareto_dim15.csv",
+    "resume_optimization_data": "real/"
+}
