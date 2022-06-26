@@ -2,10 +2,10 @@
     "application_name": "RF_Schwefel",
     "models": {
         "model": "random_forest",
-        "number_of_trees": 8,
-        "max_features": 0.8833059986404423,
+        "number_of_trees": 4,
+        "max_features": 0.08111179325252132,
         "bootstrap": false,
-        "min_samples_split": 6
+        "min_samples_split": 7
     },
     "optimization_objectives": [
         "value"
@@ -15,8 +15,6 @@
     "noise": true,
     "normalize_inputs": true,
     "output_data_file": "Tests/Schwefel/test2/Schwefel_output_samples.csv",
-    "resume_optimization": false,
-    "resume_optimization_data": "Tests/Schwefel/test2/Schwefel_output_samples.csv",
     "design_of_experiment": {
         "number_of_samples": 13
     },
@@ -24,85 +22,85 @@
         "x1": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x2": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x3": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x4": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x5": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x6": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x7": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x8": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x9": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x10": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x11": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         },
         "x12": {
             "parameter_type": "real",
             "values": [
-                -5,
-                5
+                416,
+                426
             ]
         }
     }
