@@ -13,7 +13,12 @@ GRIEWANK_HPO = {"number_of_trees": 256, "max_features": 0.454725, "bootstrap": T
 RASTRIGIN_HPO = {"number_of_trees": 32, "max_features": 0.796901, "bootstrap": True, "min_samples_split": 7}
 SCHWEFEL_HPO = {"number_of_trees": 4, "max_features": 0.134579, "bootstrap": False, "min_samples_split": 7}
 
-ITERATIONS = 2
+ACKLEY_RANGE = [-5, 5]
+GRIEWANK_RANGE = [-5, 5]
+RASTRIGIN_RANGE = [-5, 5]
+SCHWEFEL_RANGE = [421-5, 421+5]
+
+ITERATIONS = 200
 
 # Nd FUNCTIONS
 
@@ -105,10 +110,10 @@ def run_test(function_name, function, global_minimum, values, optimization_objec
 # GET FUNCTIONS LIST where fi = [GP_dir, RF_dir, name, function, minimum, values, objective, n_iter, v_type, run_no]
 def get_function_lists(dim):    
     functions = list()
-    functions.append(["Ackley", ackley_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"], ACKLEY_HPO, 0])
-    functions.append(["Griewank", griewank_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"], GRIEWANK_HPO, 0])
-    functions.append(["Rastrigin", rastrigin_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"], RASTRIGIN_HPO, 0])
-    functions.append(["Schwefel", schwefel_function, [*list([420.9687]*dim), 0], [[0, 500]] * dim, ["value"], SCHWEFEL_HPO, 0])
+    functions.append(["Ackley", ackley_function, [0] * (dim+1), [ACKLEY_RANGE] * dim, ["value"], ACKLEY_HPO, 0])
+    functions.append(["Griewank", griewank_function, [0] * (dim+1), [GRIEWANK_RANGE] * dim, ["value"], GRIEWANK_HPO, 0])
+    functions.append(["Rastrigin", rastrigin_function, [0] * (dim+1), [RASTRIGIN_RANGE] * dim, ["value"], RASTRIGIN_HPO, 0])
+    functions.append(["Schwefel", schwefel_function, [*list([420.9687]*dim), 0], [SCHWEFEL_RANGE] * dim, ["value"], SCHWEFEL_HPO, 0])
     return functions
 
 
@@ -141,5 +146,4 @@ def main(dim, n_executions):
 
 
 # dimension, executions
-main(2, 2)
-#main(12, 200, 5, "real")
+main(12, 5)

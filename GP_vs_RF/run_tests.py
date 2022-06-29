@@ -8,9 +8,10 @@ import matplotlib.pyplot as plt
 from hypermapper import optimizer
 stdout = sys.stdout 
 
-RESUME = False
-RESUME_GP_DIR = "integer/Rastrigin/GP_Rastrigin/dim8/GP_Rastrigin_output_samples_4.csv"
-RESUME_RF_DIR = "integer/Rastrigin/RF_Rastrigin/dim8/RF_Rastrigin_output_samples_4.csv"
+ACKLEY_RANGE = [-5, 5]
+GRIEWANK_RANGE = [-5, 5]
+RASTRIGIN_RANGE = [-5, 5]
+SCHWEFEL_RANGE = [421-5, 421+5]
 
 # 2d FUNCTIONS
 
@@ -189,7 +190,6 @@ def run_test(f_info):
     scenario["normalize_inputs"] = True
     scenario["design_of_experiment"] = {}
     scenario["design_of_experiment"]["number_of_samples"] = dim + 1
-    scenario["resume_optimization"] = RESUME
 
     scenario["input_parameters"] = {}
     for i in range(dim):
@@ -203,7 +203,6 @@ def run_test(f_info):
     scenario["acquisition_function"] = "EI"
     scenario["output_data_file"] = GP_csv    
     scenario["output_pareto_file"] = GP_dir + "GP_output_pareto_dim" + str(dim) + ".csv"
-    scenario["resume_optimization_data"] = RESUME_GP_DIR
 
     with open(GP_json, "w") as scenario_file:
         json.dump(scenario, scenario_file, indent=4)
@@ -212,7 +211,6 @@ def run_test(f_info):
     scenario["models"]["model"] = "random_forest"
     scenario["output_data_file"] = RF_csv
     scenario["output_pareto_file"] = RF_dir + "RF_output_pareto_dim" + str(dim) + ".csv"
-    scenario["resume_optimization_data"] = RESUME_RF_DIR
 
     with open(RF_json, "w") as scenario_file:
         json.dump(scenario, scenario_file, indent=4)
@@ -234,19 +232,19 @@ def get_function_lists(dim, n_iter, v_type):
     function_info = list()
 
     if dim == 2:
-        function_info.append(["Ackley", ackley_function_2d, [0] * (dim+1), [[-2, 2]] * dim, ["value"]])
-        function_info.append(["Griewank", griewank_function_2d, [0] * (dim+1), [[-5, 5]] * dim, ["value"]])
-        function_info.append(["Rastrigin", rastrigin_function_2d, [0] * (dim+1), [[-1, 1]] * dim, ["value"]])
-        function_info.append(["Schwefel", schwefel_function_2d, [*list([420.9687]*dim), 0], [[0, 500]] * dim, ["value"]])
+        function_info.append(["Ackley", ackley_function_2d, [0] * (dim+1), [ACKLEY_RANGE] * dim, ["value"]])
+        function_info.append(["Griewank", griewank_function_2d, [0] * (dim+1), [GRIEWANK_RANGE] * dim, ["value"]])
+        function_info.append(["Rastrigin", rastrigin_function_2d, [0] * (dim+1), [RASTRIGIN_RANGE] * dim, ["value"]])
+        function_info.append(["Schwefel", schwefel_function_2d, [*list([420.9687]*dim), 0], [SCHWEFEL_RANGE] * dim, ["value"]])
         #function_info.append(["Drop-Wave", dropwave_function_2d, [0, 0, -1], [[-1, 1]] * dim, ["value"]])
         #function_info.append(["Easom", easom_function_2d, [3.14, 3.14, -1], [[-5, 5]] * dim, ["value"]])
         #function_info.append(["Michalewicz", michalewicz_function_2d, [2.20, 1.57, -1.8013], [[-4, 4]] * dim, ["value"]])
         #function_info.append(["Styblinski-Tang", styblinski_tang_function_2d, [-2.903, -2.903, -39.166], [[-8, 8]] * dim, ["value"]])
     else:
-        function_info.append(["Ackley", ackley_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"]])
-        function_info.append(["Griewank", griewank_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"]])
-        function_info.append(["Rastrigin", rastrigin_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"]])
-        function_info.append(["Schwefel", schwefel_function, [*list([420.9687]*dim), 0], [[0, 500]] * dim, ["value"]])
+        function_info.append(["Ackley", ackley_function, [0] * (dim+1), [ACKLEY_RANGE] * dim, ["value"]])
+        function_info.append(["Griewank", griewank_function, [0] * (dim+1), [GRIEWANK_RANGE] * dim, ["value"]])
+        function_info.append(["Rastrigin", rastrigin_function, [0] * (dim+1), [RASTRIGIN_RANGE] * dim, ["value"]])
+        function_info.append(["Schwefel", schwefel_function, [*list([420.9687]*dim), 0], [SCHWEFEL_RANGE] * dim, ["value"]])
 
     # list of functions
     functions = list()
@@ -284,14 +282,11 @@ def main(dim, n_iter, n_executions, v_type):
     # for each function, run tests and plot optimization results
     for f_info in functions:
         for _ in range(n_executions):
-            #run_test(f_info)
+            run_test(f_info)
             f_info[9] += 1 
         plot_optimization(f_info, v_type, dim)
 
 
 # dimension, iterations, executions, variables type
 
-#main(2, 40, 5, "real")
-main(8, 80, 5, "integer")
-main(12, 100, 5, "integer")
-main(15, 150, 5, "integer")
+main(12, 200, 5, "real")
