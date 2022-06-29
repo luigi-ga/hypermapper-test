@@ -13,7 +13,7 @@ GRIEWANK_HPO = {"number_of_trees": 256, "max_features": 0.454725, "bootstrap": T
 RASTRIGIN_HPO = {"number_of_trees": 32, "max_features": 0.796901, "bootstrap": True, "min_samples_split": 7}
 SCHWEFEL_HPO = {"number_of_trees": 4, "max_features": 0.134579, "bootstrap": False, "min_samples_split": 7}
 
-ITERATIONS = 200
+ITERATIONS = 2
 
 # Nd FUNCTIONS
 
@@ -47,16 +47,19 @@ def schwefel_function(Xd):
     X = np.array(X)
     return 418.9829 * len(X) - np.sum(X * np.sin(np.sqrt(np.abs(X))))
 
-["Ackley", ackley_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"], ACKLEY_HPO]
 
 # RUNNING TESTS
 def run_test(function_name, function, global_minimum, values, optimization_objectives, hpo, run_no):
     dim = len(values)
+    GP_dir = "GPvsRF/" + function_name + "/GP/"
+    RF_dir = "GPvsRF/" + function_name + "/RF/"
+    if not os.path.exists(GP_dir): os.makedirs(GP_dir)
+    if not os.path.exists(RF_dir): os.makedirs(RF_dir)
 
-    GP_json = "GPvsRF/" + function_name + "/GP/GP_" + function_name + "_scenario.json"
-    RF_json = "GPvsRF/" + function_name + "/RF/RF_" + function_name + "_scenario.json"
-    GP_csv = "GPvsRF/" + function_name + "/GP/GP_output_samples_" + str(run_no) + ".csv"    
-    RF_csv = "GPvsRF/" + function_name + "/RF/RF_output_samples_" + str(run_no) + ".csv"
+    GP_json = GP_dir + "GP_" + function_name + "_scenario.json"
+    RF_json = RF_dir + "RF_" + function_name + "_scenario.json"
+    GP_csv = GP_dir + "GP_output_samples_" + str(run_no) + ".csv"    
+    RF_csv = RF_dir + "RF_output_samples_" + str(run_no) + ".csv"
     
     scenario = {}    
     scenario["models"] = {}
@@ -100,7 +103,7 @@ def run_test(function_name, function, global_minimum, values, optimization_objec
 
 
 # GET FUNCTIONS LIST where fi = [GP_dir, RF_dir, name, function, minimum, values, objective, n_iter, v_type, run_no]
-def get_function_lists(dim, n_iter, v_type):    
+def get_function_lists(dim):    
     functions = list()
     functions.append(["Ackley", ackley_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"], ACKLEY_HPO, 0])
     functions.append(["Griewank", griewank_function, [0] * (dim+1), [[-2, 2]] * dim, ["value"], GRIEWANK_HPO, 0])
@@ -119,15 +122,15 @@ def plot_optimization(function_name, dim):
     output_dir ="GPvsRF/" + function_name +  "/"
     if not os.path.exists(output_dir): os.makedirs(output_dir)
     # run sh
-    file_dir = output_dir + "GP_" + function_name + "_scenario.json"
+    file_dir = output_dir + "GP/GP_" + function_name + "_scenario.json"
     output_file = output_dir + "optimization_results_dim" + str(dim) + ".pdf"
-    subprocess.Popen(["bash", "plot_optimization.sh", file_dir, output_dir + "GP/", output_dir + "RF/", output_file, r'\rm{Regret ' + function_name + " dim " + str(dim) + "}", r'\rm{GP}', r'\rm{RF}'])
+    subprocess.Popen(["bash", "plot_optimization.sh", file_dir, output_dir + "GP/", output_dir + "RF/", output_file, r'\rm{Regret ' + function_name + "}", r'\rm{GP}', r'\rm{RF}'])
 
 
 # MAIN
-def main(dim, n_iter, n_executions, v_type):
+def main(dim, n_executions):
     # get function list
-    functions = get_function_lists(dim, n_iter, v_type)
+    functions = get_function_lists(dim)
 
     # for each function, run tests and plot optimization results
     for f in functions:
@@ -137,6 +140,6 @@ def main(dim, n_iter, n_executions, v_type):
         plot_optimization(f[0], dim)
 
 
-# dimension, iterations, executions, variables type
-
-main(12, 200, 5, "real")
+# dimension, executions
+main(2, 2)
+#main(12, 200, 5, "real")
