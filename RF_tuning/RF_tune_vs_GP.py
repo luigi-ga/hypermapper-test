@@ -8,6 +8,10 @@ import matplotlib.pyplot as plt
 from hypermapper import optimizer
 stdout = sys.stdout 
 
+
+# RISCRIVERE PER PLOTTARE RF VS RF
+
+
 ACKLEY_HPO = {"number_of_trees": 4, "max_features": 0.705391, "bootstrap": True, "min_samples_split": 2}
 GRIEWANK_HPO = {"number_of_trees": 256, "max_features": 0.454725, "bootstrap": True, "min_samples_split": 3}
 RASTRIGIN_HPO = {"number_of_trees": 32, "max_features": 0.796901, "bootstrap": True, "min_samples_split": 7}

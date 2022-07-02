@@ -1,2 +1,0 @@
-   test_number  number_of_trees  max_features  bootstrap  min_samples_split       min
-9            9                4      0.134579      False                  7  0.766859

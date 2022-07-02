@@ -5,102 +5,100 @@
     "optimization_objectives": [
         "value"
     ],
-    "optimization_iterations": 150,
+    "optimization_iterations": 200,
     "noise": true,
     "normalize_inputs": true,
     "design_of_experiment": {
         "number_of_samples": 13
     },
-    "resume_optimization": false,
     "input_parameters": {
         "x1": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x2": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x3": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x4": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x5": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x6": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x7": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x8": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x9": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x10": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x11": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         },
         "x12": {
             "parameter_type": "real",
             "values": [
-                0,
-                500
+                416,
+                426
             ]
         }
     },
     "application_name": "GP_Schwefel",
     "acquisition_function": "EI",
-    "output_data_file": "real/Schwefel/GP_Schwefel/dim12/GP_Schwefel_output_samples_3.csv",
-    "output_pareto_file": "real/Schwefel/GP_Schwefel/dim12/GP_output_pareto_dim12.csv",
-    "resume_optimization_data": "real/"
+    "output_data_file": "real/Schwefel/GP_Schwefel/dim12/GP_Schwefel_output_samples_4.csv",
+    "output_pareto_file": "real/Schwefel/GP_Schwefel/dim12/GP_output_pareto_dim12.csv"
 }
