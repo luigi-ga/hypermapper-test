@@ -11,6 +11,8 @@
     "noise": true,
     "normalize_inputs": true,
     "output_data_file": "Optimizer/optimizer.csv",
+    "resume_optimization": true,
+    "resume_optimization_data": "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/optimizer.csv",
     "design_of_experiment": {
         "number_of_samples": 5
     },
