@@ -12,10 +12,7 @@ stdout = sys.stdout
 # RISCRIVERE PER PLOTTARE RF VS RF
 
 
-ACKLEY_HPO = {"number_of_trees": 4, "max_features": 0.705391, "bootstrap": True, "min_samples_split": 2}
-GRIEWANK_HPO = {"number_of_trees": 256, "max_features": 0.454725, "bootstrap": True, "min_samples_split": 3}
-RASTRIGIN_HPO = {"number_of_trees": 32, "max_features": 0.796901, "bootstrap": True, "min_samples_split": 7}
-SCHWEFEL_HPO = {"number_of_trees": 4, "max_features": 0.134579, "bootstrap": False, "min_samples_split": 7}
+HP = {"number_of_trees": 66, "max_features": 0.9432390264401608, "bootstrap": False, "min_samples_split": 3}
 
 ACKLEY_RANGE = [-5, 5]
 GRIEWANK_RANGE = [-5, 5]
@@ -60,15 +57,15 @@ def schwefel_function(Xd):
 # RUNNING TESTS
 def run_test(function_name, function, global_minimum, values, optimization_objectives, hpo, run_no):
     dim = len(values)
-    GP_dir = "GPvsRF/" + function_name + "/GP/"
-    RF_dir = "GPvsRF/" + function_name + "/RF/"
-    if not os.path.exists(GP_dir): os.makedirs(GP_dir)
-    if not os.path.exists(RF_dir): os.makedirs(RF_dir)
+    RFu_dir = "RFvsRF/" + function_name + "/Untuned/"
+    RFt_dir = "RFvsRF/" + function_name + "/Tuned/"
+    if not os.path.exists(RFu_dir): os.makedirs(RFu_dir)
+    if not os.path.exists(RFt_dir): os.makedirs(RFt_dir)
 
-    GP_json = GP_dir + "GP_" + function_name + "_scenario.json"
-    RF_json = RF_dir + "RF_" + function_name + "_scenario.json"
-    GP_csv = GP_dir + "GP_output_samples_" + str(run_no) + ".csv"    
-    RF_csv = RF_dir + "RF_output_samples_" + str(run_no) + ".csv"
+    RFu_json = RFu_dir + "RF_" + function_name + "_scenario.json"
+    RFt_json = RFt_dir + "GP_" + function_name + "_scenario.json"  
+    RFu_csv = RFu_dir + "RF_output_samples_" + str(run_no) + ".csv"
+    RFt_csv = RFt_dir + "GP_output_samples_" + str(run_no) + ".csv"  
     
     scenario = {}    
     scenario["models"] = {}
@@ -86,28 +83,26 @@ def run_test(function_name, function, global_minimum, values, optimization_objec
         x["values"] = values[i]
         scenario["input_parameters"]["x" + str(i+1)] = x    
 
-    scenario["application_name"] = "GP_" + function_name
-    scenario["models"]["model"] = "gaussian_process"
-    scenario["acquisition_function"] = "EI"
-    scenario["output_data_file"] = GP_csv    
-
-    with open(GP_json, "w") as scenario_file:
-        json.dump(scenario, scenario_file, indent=4)
-
     scenario["application_name"] = "RF_" + function_name
     scenario["models"]["model"] = "random_forest"
+    scenario["output_data_file"] = RFu_csv    
+
+    with open(RFu_json, "w") as scenario_file:
+        json.dump(scenario, scenario_file, indent=4)
+
+    scenario["application_name"] = "RF_" + function_name + "_tuned"
     scenario["models"]["model"] = "random_forest"
     scenario["models"]["number_of_trees"] = hpo["number_of_trees"]
     scenario["models"]["max_features"] = hpo["max_features"]
     scenario["models"]["bootstrap"] = hpo["bootstrap"]
     scenario["models"]["min_samples_split"] = hpo["min_samples_split"]
-    scenario["output_data_file"] = RF_csv
+    scenario["output_data_file"] = RFt_csv
 
-    with open(RF_json, "w") as scenario_file:
+    with open(RFt_json, "w") as scenario_file:
         json.dump(scenario, scenario_file, indent=4)
         
-    optimizer.optimize(GP_json, function)
-    optimizer.optimize(RF_json, function)
+    optimizer.optimize(RFu_json, function)
+    optimizer.optimize(RFt_json, function)
     sys.stdout = stdout
 
 

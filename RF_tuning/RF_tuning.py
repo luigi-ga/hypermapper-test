@@ -33,7 +33,7 @@ GRIEWANK_RANGE = [-5, 5]
 RASTRIGIN_RANGE = [-5, 5]
 SCHWEFEL_RANGE = [420.9687-5, 420.9687+5]
 
-run_no = 0
+run_no = 45
 
 # configuration ranking for each function
 # merge results to find best hyperparam
@@ -169,6 +169,9 @@ def RF_hyperparameter_tuning(function):
     scenario["noise"] = True
     scenario["normalize_inputs"] = True
     scenario["output_data_file"] = csv_dir
+
+    scenario["resume_optimization"] = True
+    scenario["resume_optimization_data"] = "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/optimizer.csv"
     
     scenario["design_of_experiment"] = {}
     scenario["design_of_experiment"]["number_of_samples"] = 5   # d + 1
