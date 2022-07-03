@@ -14,16 +14,17 @@ stdout = sys.stdout
 RESUME = False
 NUM_COMPARISON = 5   # regret comparison in generated pdf
 
-TIME_BUDGET_GP = 1500
-TIME_BUDGET_RF = 30
-MAX_ITERATIONS_GP = 5 #50
-MAX_ITERATIONS_RF = 20 #200
-DIM = 2 #12
+TIME_BUDGET_GP = 2800
+TIME_BUDGET_RF = 15
+MAX_ITERATIONS_GP = 40
+MAX_ITERATIONS_RF = 200
+DIM = 12
 
-NUMBER_TREE_VALUES = [1, 7]             # converted to 2^number_of_trees + 2 when testing
+NUMBER_TREE_VALUES = [1, 8]             # converted to 2^number_of_trees + 2 when testing
 FEATURE_PERCENTAGE_VALUES = [0, 1]
 BOOTSTRAP_VALUES = [0, 1]
 MIN_SAMPLE_SPLIT_VALUES = [2, 10]       
+
 # https://stats.stackexchange.com/questions/286107/setting-leaf-nodes-minimum-sample-value-for-random-forest-decision-trees ???
 # https://bayesmark.readthedocs.io/en/latest/scoring.html#analyze-and-summarize-results
 
@@ -81,8 +82,8 @@ def get_function_lists(dim):
     functions = list()
     functions.append(["Ackley", ackley_function, [ACKLEY_RANGE] * dim, ["value"], 12.642411176571153])
     functions.append(["Griewank", griewank_function, [GRIEWANK_RANGE] * dim, ["value"], 1.0750000277278526])
-    #functions.append(["Rastrigin", rastrigin_function, [RASTRIGIN_RANGE] * dim, ["value"], 300.0])
-    #functions.append(["Schwefel", schwefel_function, [SCHWEFEL_RANGE] * dim, ["value"], 37.87988422424223])
+    functions.append(["Rastrigin", rastrigin_function, [RASTRIGIN_RANGE] * dim, ["value"], 300.0])
+    functions.append(["Schwefel", schwefel_function, [SCHWEFEL_RANGE] * dim, ["value"], 37.87988422424223])
     return functions
     
 
