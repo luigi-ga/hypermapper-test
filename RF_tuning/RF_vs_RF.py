@@ -17,7 +17,7 @@ HP = {"number_of_trees": 66, "max_features": 0.9432390264401608, "bootstrap": Fa
 ACKLEY_RANGE = [-5, 5]
 GRIEWANK_RANGE = [-5, 5]
 RASTRIGIN_RANGE = [-5, 5]
-SCHWEFEL_RANGE = [421-5, 421+5]
+SCHWEFEL_RANGE = [420.9687-5, 420.9687+5]
 
 ITERATIONS = 200
 
@@ -55,17 +55,17 @@ def schwefel_function(Xd):
 
 
 # RUNNING TESTS
-def run_test(function_name, function, global_minimum, values, optimization_objectives, hpo, run_no):
+def run_test(function_name, function, global_minimum, values, optimization_objectives, run_no):
     dim = len(values)
     RFu_dir = "RFvsRF/" + function_name + "/Untuned/"
     RFt_dir = "RFvsRF/" + function_name + "/Tuned/"
     if not os.path.exists(RFu_dir): os.makedirs(RFu_dir)
     if not os.path.exists(RFt_dir): os.makedirs(RFt_dir)
 
-    RFu_json = RFu_dir + "RF_" + function_name + "_scenario.json"
-    RFt_json = RFt_dir + "GP_" + function_name + "_scenario.json"  
-    RFu_csv = RFu_dir + "RF_output_samples_" + str(run_no) + ".csv"
-    RFt_csv = RFt_dir + "GP_output_samples_" + str(run_no) + ".csv"  
+    RFu_json = RFu_dir + "RFu_" + function_name + "_scenario.json"
+    RFt_json = RFt_dir + "RFt_" + function_name + "_scenario.json"  
+    RFu_csv = RFu_dir + "RFu_output_samples_" + str(run_no) + ".csv"
+    RFt_csv = RFt_dir + "RFt_output_samples_" + str(run_no) + ".csv"  
     
     scenario = {}    
     scenario["models"] = {}
@@ -92,10 +92,10 @@ def run_test(function_name, function, global_minimum, values, optimization_objec
 
     scenario["application_name"] = "RF_" + function_name + "_tuned"
     scenario["models"]["model"] = "random_forest"
-    scenario["models"]["number_of_trees"] = hpo["number_of_trees"]
-    scenario["models"]["max_features"] = hpo["max_features"]
-    scenario["models"]["bootstrap"] = hpo["bootstrap"]
-    scenario["models"]["min_samples_split"] = hpo["min_samples_split"]
+    scenario["models"]["number_of_trees"] = HP["number_of_trees"]
+    scenario["models"]["max_features"] = HP["max_features"]
+    scenario["models"]["bootstrap"] = HP["bootstrap"]
+    scenario["models"]["min_samples_split"] = HP["min_samples_split"]
     scenario["output_data_file"] = RFt_csv
 
     with open(RFt_json, "w") as scenario_file:
@@ -109,10 +109,10 @@ def run_test(function_name, function, global_minimum, values, optimization_objec
 # GET FUNCTIONS LIST where fi = [GP_dir, RF_dir, name, function, minimum, values, objective, n_iter, v_type, run_no]
 def get_function_lists(dim):    
     functions = list()
-    functions.append(["Ackley", ackley_function, [0] * (dim+1), [ACKLEY_RANGE] * dim, ["value"], ACKLEY_HPO, 0])
-    functions.append(["Griewank", griewank_function, [0] * (dim+1), [GRIEWANK_RANGE] * dim, ["value"], GRIEWANK_HPO, 0])
-    functions.append(["Rastrigin", rastrigin_function, [0] * (dim+1), [RASTRIGIN_RANGE] * dim, ["value"], RASTRIGIN_HPO, 0])
-    functions.append(["Schwefel", schwefel_function, [*list([420.9687]*dim), 0], [SCHWEFEL_RANGE] * dim, ["value"], SCHWEFEL_HPO, 0])
+    functions.append(["Ackley", ackley_function, [0] * (dim+1), [ACKLEY_RANGE] * dim, ["value"], 0])
+    functions.append(["Griewank", griewank_function, [0] * (dim+1), [GRIEWANK_RANGE] * dim, ["value"], 0])
+    functions.append(["Rastrigin", rastrigin_function, [0] * (dim+1), [RASTRIGIN_RANGE] * dim, ["value"], 0])
+    functions.append(["Schwefel", schwefel_function, [*list([420.9687]*dim), 0], [SCHWEFEL_RANGE] * dim, ["value"], 0])
     return functions
 
 
@@ -123,12 +123,12 @@ def plot_optimization(function_name, dim):
     f.write('hm-plot-optimization-results -j $1 -i $2 $3 -o $4 -t "$5" -l "$6" "$7"')
     f.close()
     # create directory if not exists
-    output_dir ="GPvsRF/" + function_name +  "/"
+    output_dir ="RFvsRF/" + function_name +  "/"
     if not os.path.exists(output_dir): os.makedirs(output_dir)
     # run sh
-    file_dir = output_dir + "GP/GP_" + function_name + "_scenario.json"
-    output_file = output_dir + "optimization_results_dim" + str(dim) + ".pdf"
-    subprocess.Popen(["bash", "plot_optimization.sh", file_dir, output_dir + "GP/", output_dir + "RF/", output_file, r'\rm{Regret ' + function_name + "}", r'\rm{GP}', r'\rm{RF}'])
+    file_dir = output_dir + "Untuned/RFu_" + function_name + "_scenario.json"
+    output_file = output_dir + "optimization_results" + str(dim) + ".pdf"
+    subprocess.Popen(["bash", "plot_optimization.sh", file_dir, output_dir + "Untuned/", output_dir + "Tuned/", output_file, r'\rm{Regret ' + function_name + "}", r'\rm{RF default}', r'\rm{RF tuned}'])
 
 
 # MAIN
@@ -139,8 +139,8 @@ def main(dim, n_executions):
     # for each function, run tests and plot optimization results
     for f in functions:
         for _ in range(n_executions):
-            run_test(f[0], f[1], f[2], f[3], f[4], f[5], f[6])
-            f[6] += 1 
+            run_test(f[0], f[1], f[2], f[3], f[4], f[5])
+            f[5] += 1 
         plot_optimization(f[0], dim)
 
 
