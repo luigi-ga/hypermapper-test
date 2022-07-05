@@ -12,15 +12,16 @@ stdout = sys.stdout
 # https://www.analyticsvidhya.com/blog/2020/03/beginners-guide-random-forest-hyperparameter-tuning/
 
 RESUME = False
-NUM_COMPARISON = 5   # regret comparison in generated pdf
+NUM_COMPARISON = 15   # regret comparison in generated pdf
 
 TIME_BUDGET_GP = 2800
-TIME_BUDGET_RF = 15
-MAX_ITERATIONS_GP = 40 #2
-MAX_ITERATIONS_RF = 200
-DIM = 12
+TIME_BUDGET_RF = 4
+MAX_ITERATIONS_GP = 1
+MAX_ITERATIONS_RF = 1
+DIM = 2
+REPETITIONS = 2
 
-NUMBER_TREE_VALUES = [1, 8]             # converted to 2^number_of_trees + 2 when testing
+NUMBER_TREE_VALUES = [0, 6]             # converted to 2^number_of_trees + 2 when testing
 FEATURE_PERCENTAGE_VALUES = [0, 1]
 BOOTSTRAP_VALUES = [0, 1]
 MIN_SAMPLE_SPLIT_VALUES = [2, 10]       
@@ -33,7 +34,9 @@ GRIEWANK_RANGE = [-5, 5]
 RASTRIGIN_RANGE = [-5, 5]
 SCHWEFEL_RANGE = [420.9687-5, 420.9687+5]
 
-run_no = 45
+NUMBER_OF_TREES = [2, 5, 10, 25, 50, 100, 200]
+
+run_no = 0
 
 # configuration ranking for each function
 # merge results to find best hyperparam
@@ -77,14 +80,18 @@ def schwefel_function(Xd):
     return 418.9829 * len(X) - np.sum(X * np.sin(np.sqrt(np.abs(X))))
 
 
+def function_max(function, dim, f_range):
+    Xd = {}
+    for i in range(dim):
+        Xd["x" + str(i+1)] = f_range
+    return function(Xd)
 
-def get_function_lists(dim):    
-    functions = list()
-    functions.append(["Ackley", ackley_function, [ACKLEY_RANGE] * dim, ["value"], 12.642411176571153])
-    functions.append(["Griewank", griewank_function, [GRIEWANK_RANGE] * dim, ["value"], 1.0750000277278526])
-    functions.append(["Rastrigin", rastrigin_function, [RASTRIGIN_RANGE] * dim, ["value"], 300.0])
-    functions.append(["Schwefel", schwefel_function, [SCHWEFEL_RANGE] * dim, ["value"], 37.87988422424223])
-    return functions
+FUNCTIONS = [
+            ["Ackley", ackley_function, [ACKLEY_RANGE] * DIM, ["value"], function_max(ackley_function, DIM, ACKLEY_RANGE[1])],
+            ["Griewank", griewank_function, [GRIEWANK_RANGE] * DIM, ["value"], function_max(griewank_function, DIM, GRIEWANK_RANGE[1])],
+            ["Rastrigin", rastrigin_function, [RASTRIGIN_RANGE] * DIM, ["value"], function_max(rastrigin_function, DIM, RASTRIGIN_RANGE[1])],
+            ["Schwefel", schwefel_function, [SCHWEFEL_RANGE] * DIM, ["value"], function_max(schwefel_function, DIM, SCHWEFEL_RANGE[1])]
+            ]
     
 
 # random forest function: we ran random forest with the X parameters
@@ -96,21 +103,25 @@ def random_forest(X):
 
     global run_no
     min = 0
-    functions = get_function_lists(DIM)
-    for f in functions:
-        min += random_forest_optimizer(f[0], f[1], f[2], f[4], number_of_trees, max_features, bootstrap, min_samples_split, run_no)
+    for f in FUNCTIONS:
+        minf = 0
+        for i in range(REPETITIONS):
+            minf += random_forest_optimizer(f[0], f[1], f[2], f[4], number_of_trees, max_features, bootstrap, min_samples_split, run_no, i)
+        minf /= REPETITIONS
+        write_description_file(f[0], NUMBER_OF_TREES[int(number_of_trees)], float(max_features), bool(bootstrap), int(min_samples_split), minf, minf/f[4], run_no) 
+        min += (minf/f[4])
     run_no += 1    
-    return min/len(functions)
+    return min/len(FUNCTIONS)
 
 
 
 # random forest optimizer: run random forest bayesyan optimization and return the global minima
-def random_forest_optimizer(function_name, function, values, max, number_of_trees, max_features, bootstrap, min_samples_split, run_no):
-    directory = "Tests/" + function_name + "/test" + str(run_no) + "/"
+def random_forest_optimizer(function_name, function, values, max, number_of_trees, max_features, bootstrap, min_samples_split, run_no, rep_no):
+    directory = "Tests/" + "dim" + str(DIM) + "/" + function_name + "/test" + str(run_no) + "/"
     if not os.path.exists(directory): os.makedirs(directory)
 
-    json_dir = directory + function_name + "_scenario.json"
-    csv_dir = directory + function_name + "_output_samples.csv"
+    json_dir = directory + "scenario.json"
+    csv_dir = directory + "output_samples_" + str(rep_no) + ".csv"
 
     scenario = {}    
     scenario["application_name"] = "RF_" + function_name
@@ -135,7 +146,7 @@ def random_forest_optimizer(function_name, function, values, max, number_of_tree
         scenario["input_parameters"]["x" + str(i+1)] = x        
 
     scenario["models"]["model"] = "random_forest"
-    scenario["models"]["number_of_trees"] = int(2**number_of_trees) + 2 # to have default value in sample space
+    scenario["models"]["number_of_trees"] = NUMBER_OF_TREES[int(number_of_trees)]
     scenario["models"]["max_features"] = float(max_features)
     scenario["models"]["bootstrap"] = bool(bootstrap)
     scenario["models"]["min_samples_split"] = int(min_samples_split)
@@ -147,18 +158,17 @@ def random_forest_optimizer(function_name, function, values, max, number_of_tree
 
     # return the minimum value found by hypermapper
     df = pd.read_csv(csv_dir)
-    min = float(df['value'].min())
-    write_description_file(function_name, int(2**number_of_trees+2), float(max_features), bool(bootstrap), int(min_samples_split), min, min/max, run_no) 
-    return min/max
+    min = float(df['value'].min())    
+    return min
     
 
 # run bayesyan optimization to tune random forest hyperparameters
 def RF_hyperparameter_tuning(function):
-    directory = "Optimizer/"
+    directory = "Optimizer/dim" + str(DIM) + "/"
     if not os.path.exists(directory): os.makedirs(directory)
 
-    csv_dir = directory + "optimizer.csv"
-    json_dir = directory + "optimizer.json"
+    csv_dir = directory + "optimizer_dim" + str(DIM) + ".csv"
+    json_dir = directory + "optimizer_dim" + str(DIM) + ".json"
 
     scenario = {}    
     scenario["application_name"] = "RF optimizer"
@@ -170,8 +180,8 @@ def RF_hyperparameter_tuning(function):
     scenario["normalize_inputs"] = True
     scenario["output_data_file"] = csv_dir
 
-    scenario["resume_optimization"] = True
-    scenario["resume_optimization_data"] = "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/optimizer.csv"
+    scenario["resume_optimization"] = False
+    scenario["resume_optimization_data"] = "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/optimizer_dim" + str(DIM) + ".csv"
     
     scenario["design_of_experiment"] = {}
     scenario["design_of_experiment"]["number_of_samples"] = 5   # d + 1
@@ -181,30 +191,29 @@ def RF_hyperparameter_tuning(function):
     number_of_trees = {}
     number_of_trees["parameter_type"] = "integer"             
     number_of_trees["values"] = NUMBER_TREE_VALUES   
-    number_of_trees["parameter_default"] = 3
+    #number_of_trees["parameter_default"] = 3
     scenario["input_parameters"]["number_of_trees"] = number_of_trees
 
     max_features = {}
     max_features["parameter_type"] = "real"               
     max_features["values"] = FEATURE_PERCENTAGE_VALUES     
-    max_features["parameter_default"] = 0.5
+    #max_features["parameter_default"] = 0.5
     scenario["input_parameters"]["max_features"] = max_features      
 
     bootstrap = {}
     bootstrap["parameter_type"] = "integer"            
     bootstrap["values"] = BOOTSTRAP_VALUES
-    bootstrap["parameter_default"] = 1
+    #bootstrap["parameter_default"] = 1
     scenario["input_parameters"]["bootstrap"] = bootstrap
 
     min_samples_split = {}
     min_samples_split["parameter_type"] = "integer"            
     min_samples_split["values"] = MIN_SAMPLE_SPLIT_VALUES
-    min_samples_split["parameter_default"] = 5
+    #min_samples_split["parameter_default"] = 5
     scenario["input_parameters"]["min_samples_split"] = min_samples_split      
 
     scenario["models"]["model"] = "gaussian_process"
     scenario["acquisition_function"] = "EI"
-    scenario["output_data_file"] = csv_dir 
 
     with open(json_dir, "w") as scenario_file:
         json.dump(scenario, scenario_file, indent=4)
@@ -215,15 +224,19 @@ def RF_hyperparameter_tuning(function):
 
 # write a file with test info in test directory
 def write_description_file(f_name, number_of_trees, max_features, bootstrap, min_samples_split, min, norm_min, run_no):
-    dir = "Tests/" + f_name + "/tests_specs.csv"
+    dir = "Tests/" + "dim" + str(DIM) + "/" + f_name + "/tests_specs.csv"
     with open(dir, "a+", newline='') as write_obj:
         if run_no == 0:
-            csv.writer(write_obj).writerow(["test_number", "number_of_trees", "max_features", "bootstrap", "min_samples_split", "min", "normalized_min"])
+            csv.writer(write_obj).writerow(["test_number", "number_of_trees", "max_features", "bootstrap", "min_samples_split", "mean_min", "mean_normalized_min"])
         csv.writer(write_obj).writerow([run_no, number_of_trees, max_features, bootstrap, min_samples_split, min, norm_min])
 
 
 # plot optimization results (regret)
-def plot_optimization(json_dir, dirs, output_file, f_name):
+def plot_optimization(f_name):
+    dirs = "Tests/" + "dim" + str(DIM) + "/" + f_name + "/"
+    json_dir = dirs + "test0/" + f_name + "_scenario.json"
+    output_file = dirs + "regret.pdf"
+
     code = 'hm-plot-optimization-results -j ' + json_dir + ' -i '
     folders = [name for name in os.listdir(dirs) if os.path.isdir(os.path.join(dirs, name))]
     folders = folders[0::(ceil(len(folders)/NUM_COMPARISON))]

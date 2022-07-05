@@ -57,8 +57,8 @@ def schwefel_function(Xd):
 # RUNNING TESTS
 def run_test(function_name, function, global_minimum, values, optimization_objectives, run_no):
     dim = len(values)
-    RFu_dir = "RFvsRF/" + function_name + "/Untuned/"
-    RFt_dir = "RFvsRF/" + function_name + "/Tuned/"
+    RFu_dir = "RFvsRF/" + "dim" + str(dim) + "/" + function_name + "/Untuned/"
+    RFt_dir = "RFvsRF/" + "dim" + str(dim) + "/" + function_name + "/Tuned/"
     if not os.path.exists(RFu_dir): os.makedirs(RFu_dir)
     if not os.path.exists(RFt_dir): os.makedirs(RFt_dir)
 
@@ -123,7 +123,7 @@ def plot_optimization(function_name, dim):
     f.write('hm-plot-optimization-results -j $1 -i $2 $3 -o $4 -t "$5" -l "$6" "$7"')
     f.close()
     # create directory if not exists
-    output_dir ="RFvsRF/" + function_name +  "/"
+    output_dir ="RFvsRF/" + "dim" + str(dim) + "/" + function_name +  "/"
     if not os.path.exists(output_dir): os.makedirs(output_dir)
     # run sh
     file_dir = output_dir + "Untuned/RFu_" + function_name + "_scenario.json"
