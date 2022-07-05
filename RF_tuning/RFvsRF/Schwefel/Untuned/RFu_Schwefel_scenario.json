@@ -5,11 +5,11 @@
     "optimization_objectives": [
         "value"
     ],
-    "optimization_iterations": 200,
+    "optimization_iterations": 10,
     "noise": true,
     "normalize_inputs": true,
     "design_of_experiment": {
-        "number_of_samples": 13
+        "number_of_samples": 2
     },
     "input_parameters": {
         "x1": {
@@ -18,85 +18,8 @@
                 415.9687,
                 425.9687
             ]
-        },
-        "x2": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x3": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x4": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x5": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x6": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x7": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x8": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x9": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x10": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x11": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
-        },
-        "x12": {
-            "parameter_type": "real",
-            "values": [
-                415.9687,
-                425.9687
-            ]
         }
     },
     "application_name": "RF_Schwefel",
-    "output_data_file": "RFvsRF/Schwefel/Untuned/RFu_output_samples_4.csv"
+    "output_data_file": "RFvsRF/Schwefel/Untuned/RFu_output_samples_3.csv"
 }
