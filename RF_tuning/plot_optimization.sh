@@ -1,1 +1,0 @@
-hm-plot-optimization-results -j Tests/Schwefel/test0/Schwefel_scenario.json -i Tests/Schwefel/test4 Tests/Schwefel/test48 Tests/Schwefel/test54 Tests/Schwefel/test5 Tests/Schwefel/test46 Tests/Schwefel/test9 -o Tests/Schwefel/progress_regret.pdf -t "$1" -l "\rm{test4}" "\rm{test48}" "\rm{test54}" "\rm{test5}" "\rm{test46}" "\rm{test9}" 
