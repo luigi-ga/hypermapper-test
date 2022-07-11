@@ -15,13 +15,13 @@ RESUME = False
 NUM_COMPARISON = 15   # regret comparison in generated pdf
 
 TIME_BUDGET_GP = 2800
-TIME_BUDGET_RF = 4
-MAX_ITERATIONS_GP = 1
-MAX_ITERATIONS_RF = 1
+TIME_BUDGET_RF = 7
+MAX_ITERATIONS_GP = 40
+MAX_ITERATIONS_RF = 50
 DIM = 2
-REPETITIONS = 2
+REPETITIONS = 3
 
-NUMBER_TREE_VALUES = [0, 6]             # converted to 2^number_of_trees + 2 when testing
+NUMBER_TREE_VALUES = [0, 6]             # index of NUMBER_OF_TREES array
 FEATURE_PERCENTAGE_VALUES = [0, 1]
 BOOTSTRAP_VALUES = [0, 1]
 MIN_SAMPLE_SPLIT_VALUES = [2, 10]       
@@ -180,8 +180,8 @@ def RF_hyperparameter_tuning(function):
     scenario["normalize_inputs"] = True
     scenario["output_data_file"] = csv_dir
 
-    scenario["resume_optimization"] = False
-    scenario["resume_optimization_data"] = "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/optimizer_dim" + str(DIM) + ".csv"
+    scenario["resume_optimization"] = RESUME
+    scenario["resume_optimization_data"] = "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/dim" + str(DIM) + "/optimizer_dim" + str(DIM) + ".csv"
     
     scenario["design_of_experiment"] = {}
     scenario["design_of_experiment"]["number_of_samples"] = 5   # d + 1

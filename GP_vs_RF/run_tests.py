@@ -289,4 +289,4 @@ def main(dim, n_iter, n_executions, v_type):
 
 # dimension, iterations, executions, variables type
 
-main(12, 200, 5, "real")
+main(1, 1, 1, "real")

@@ -1,0 +1,27 @@
+{
+    "models": {
+        "model": "random_forest"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 1,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 2
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        }
+    },
+    "application_name": "RF_Ackley",
+    "acquisition_function": "EI",
+    "output_data_file": "real/Ackley/RF_Ackley/dim1/RF_Ackley_output_samples_0.csv",
+    "output_pareto_file": "real/Ackley/RF_Ackley/dim1/RF_output_pareto_dim1.csv"
+}

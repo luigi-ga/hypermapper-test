@@ -1,0 +1,39 @@
+{
+    "application_name": "RF_Schwefel",
+    "models": {
+        "model": "random_forest",
+        "number_of_trees": 2,
+        "max_features": 0.36253192239245347,
+        "bootstrap": true,
+        "min_samples_split": 5
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 50,
+    "time_budget": 7,
+    "noise": true,
+    "normalize_inputs": true,
+    "output_data_file": "Tests/dim2/Schwefel/test38/output_samples_2.csv",
+    "resume_optimization": false,
+    "resume_optimization_data": "Tests/dim2/Schwefel/test38/output_samples_2.csv",
+    "design_of_experiment": {
+        "number_of_samples": 3
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        }
+    }
+}

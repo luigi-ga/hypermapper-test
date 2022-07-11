@@ -12,14 +12,14 @@ stdout = sys.stdout
 # RISCRIVERE PER PLOTTARE RF VS RF
 
 
-HP = {"number_of_trees": 2, "max_features": 1, "bootstrap": True, "min_samples_split": 2}
+HP = {"number_of_trees": 5, "max_features": 0.36322986399403323, "bootstrap": False, "min_samples_split": 5}
 
 ACKLEY_RANGE = [-5, 5]
 GRIEWANK_RANGE = [-5, 5]
 RASTRIGIN_RANGE = [-5, 5]
 SCHWEFEL_RANGE = [420.9687-5, 420.9687+5]
 
-ITERATIONS = 10
+ITERATIONS = 60
 
 # Nd FUNCTIONS
 
@@ -145,4 +145,4 @@ def main(dim, n_executions):
 
 
 # dimension, executions
-main(1, 4)
+main(2, 4)

@@ -1,0 +1,36 @@
+{
+    "models": {
+        "model": "random_forest",
+        "number_of_trees": 5,
+        "max_features": 0.36322986399403323,
+        "bootstrap": false,
+        "min_samples_split": 5
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 60,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 3
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        }
+    },
+    "application_name": "RF_Griewank_tuned",
+    "output_data_file": "RFvsRF/dim2/Griewank/Tuned/RFt_output_samples_3.csv"
+}
