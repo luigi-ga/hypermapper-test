@@ -1,7 +1,0 @@
-test_number,acquisition_function,local_search_starting_points,local_search_random_points,log_transform_output,lengthscale_prior,epsilon_greedy_threshold,predict_noiseless,exploration_augmentation,mean_min,mean_normalized_min
-0,UCB,1,1000,True,gamma,1,False,0.0001,8.855999765455834,0.7004992672495675
-1,UCB,10,1,True,gamma,0,True,0.01,6.327443037550866,0.5004933749723983
-2,EI,1,100,True,gamma,1,True,1e-05,5.190589054945344,0.41056954899272025
-3,EI,10,1000,True,gamma,1,False,0.01,8.45647310600431,0.6688971737982862
-4,EI,10,10,False,gamma,0,True,1e-05,8.311991520295676,0.657468848640156
-5,TS,1,1000,False,gamma,1,True,1e-05,4.078983868734016,0.3226428734016472
