@@ -1,0 +1,81 @@
+{
+    "application_name": "RF_Rastrigin",
+    "models": {
+        "model": "random_forest",
+        "number_of_trees": 50,
+        "max_features": 0.0013025479568589413,
+        "bootstrap": true,
+        "min_samples_split": 10
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 150,
+    "time_budget": 8,
+    "noise": true,
+    "normalize_inputs": true,
+    "output_data_file": "Tests/dim8/Rastrigin/test22/output_samples_2.csv",
+    "resume_optimization": false,
+    "resume_optimization_data": "Tests/dim8/Rastrigin/test22/output_samples_2.csv",
+    "design_of_experiment": {
+        "number_of_samples": 9
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x3": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x4": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x5": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x6": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x7": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x8": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        }
+    }
+}
