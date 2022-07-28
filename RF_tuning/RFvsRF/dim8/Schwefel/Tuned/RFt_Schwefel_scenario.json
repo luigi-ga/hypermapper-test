@@ -1,0 +1,78 @@
+{
+    "models": {
+        "model": "random_forest",
+        "number_of_trees": 3,
+        "max_features": 0.3800007879335451,
+        "bootstrap": true,
+        "min_samples_split": 2
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 150,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 9
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x3": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x4": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x5": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x6": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x7": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x8": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        }
+    },
+    "application_name": "RF_Schwefel_tuned",
+    "output_data_file": "RFvsRF/dim8/Schwefel/Tuned/RFt_output_samples_3.csv"
+}

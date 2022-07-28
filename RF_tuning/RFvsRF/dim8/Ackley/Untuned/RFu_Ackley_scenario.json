@@ -1,0 +1,74 @@
+{
+    "models": {
+        "model": "random_forest"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 150,
+    "noise": true,
+    "normalize_inputs": true,
+    "design_of_experiment": {
+        "number_of_samples": 9
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x3": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x4": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x5": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x6": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x7": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        },
+        "x8": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        }
+    },
+    "application_name": "RF_Ackley",
+    "output_data_file": "RFvsRF/dim8/Ackley/Untuned/RFu_output_samples_3.csv"
+}

@@ -12,14 +12,14 @@ stdout = sys.stdout
 # RISCRIVERE PER PLOTTARE RF VS RF
 
 
-HP = {"number_of_trees": 5, "max_features": 0.36322986399403323, "bootstrap": False, "min_samples_split": 5}
+HP = {"number_of_trees": 3, "max_features": 0.3800007879335451, "bootstrap": True, "min_samples_split": 2}
 
 ACKLEY_RANGE = [-5, 5]
 GRIEWANK_RANGE = [-5, 5]
 RASTRIGIN_RANGE = [-5, 5]
 SCHWEFEL_RANGE = [420.9687-5, 420.9687+5]
 
-ITERATIONS = 60
+ITERATIONS = 150
 
 # Nd FUNCTIONS
 
@@ -120,7 +120,7 @@ def get_function_lists(dim):
 def plot_optimization(function_name, dim):
     # create file sh for plotting optimization results
     f = open("plot_optimization.sh", "w+")
-    f.write('hm-plot-optimization-results -j $1 -i $2 $3 -o $4 -t "$5" -l "$6" "$7"')
+    f.write('hm-plot-optimization-results -j $1 -i $2 $3 -o $4 -t "$5" -l "$6" "$7" -log')
     f.close()
     # create directory if not exists
     output_dir ="RFvsRF/" + "dim" + str(dim) + "/" + function_name +  "/"
@@ -145,4 +145,4 @@ def main(dim, n_executions):
 
 
 # dimension, executions
-main(2, 4)
+main(8, 4)

@@ -1,0 +1,48 @@
+{
+    "application_name": "GP_Schwefel",
+    "models": {
+        "model": "gaussian_process",
+        "acquisition_function": "EI",
+        "local_search_starting_points": 1,
+        "local_search_random_points": 10000,
+        "log_transform_output": true,
+        "lengthscale_prior": {
+            "name": "gamma",
+            "parameters": [
+                1.3,
+                0.1
+            ]
+        },
+        "epsilon_greedy_threshold": 1,
+        "predict_noiseless": false,
+        "exploration_augmentation": 1e-05
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 38,
+    "time_budget": 5,
+    "normalize_inputs": true,
+    "output_data_file": "Tests/dim2/Schwefel/test3/output_samples_2.csv",
+    "resume_optimization": false,
+    "resume_optimization_data": "Tests/dim2/Schwefel/test3/output_samples_2.csv",
+    "design_of_experiment": {
+        "number_of_samples": 3
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        },
+        "x2": {
+            "parameter_type": "real",
+            "values": [
+                415.9687,
+                425.9687
+            ]
+        }
+    }
+}

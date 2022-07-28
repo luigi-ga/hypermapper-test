@@ -1,0 +1,32 @@
+{
+    "application_name": "RF_Griewank",
+    "models": {
+        "model": "random_forest",
+        "number_of_trees": 200,
+        "max_features": 0.0033209903954823433,
+        "bootstrap": true,
+        "min_samples_split": 10
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 10,
+    "time_budget": 20,
+    "noise": true,
+    "normalize_inputs": true,
+    "output_data_file": "Tests/dim1/Griewank/test7/output_samples_2.csv",
+    "resume_optimization": false,
+    "resume_optimization_data": "Tests/dim1/Griewank/test7/output_samples_2.csv",
+    "design_of_experiment": {
+        "number_of_samples": 2
+    },
+    "input_parameters": {
+        "x1": {
+            "parameter_type": "real",
+            "values": [
+                -5,
+                5
+            ]
+        }
+    }
+}

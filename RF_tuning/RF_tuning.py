@@ -12,14 +12,15 @@ stdout = sys.stdout
 # https://www.analyticsvidhya.com/blog/2020/03/beginners-guide-random-forest-hyperparameter-tuning/
 
 RESUME = False
-NUM_COMPARISON = 15   # regret comparison in generated pdf
+RESUME_CSV = "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/dim8/optimizer_dim8.csv"
+NUM_COMPARISON = 4   # regret comparison in generated pdf
 
-TIME_BUDGET_GP = 2800
-TIME_BUDGET_RF = 7
-MAX_ITERATIONS_GP = 40
-MAX_ITERATIONS_RF = 50
+TIME_BUDGET_GP = 35000
+TIME_BUDGET_RF = 20
+MAX_ITERATIONS_GP = 45
+MAX_ITERATIONS_RF = 45
 DIM = 2
-REPETITIONS = 3
+REPETITIONS = 10
 
 NUMBER_TREE_VALUES = [0, 6]             # index of NUMBER_OF_TREES array
 FEATURE_PERCENTAGE_VALUES = [0, 1]
@@ -29,10 +30,10 @@ MIN_SAMPLE_SPLIT_VALUES = [2, 10]
 # https://stats.stackexchange.com/questions/286107/setting-leaf-nodes-minimum-sample-value-for-random-forest-decision-trees ???
 # https://bayesmark.readthedocs.io/en/latest/scoring.html#analyze-and-summarize-results
 
-ACKLEY_RANGE = [-5, 5]
-GRIEWANK_RANGE = [-5, 5]
-RASTRIGIN_RANGE = [-5, 5]
-SCHWEFEL_RANGE = [420.9687-5, 420.9687+5]
+ACKLEY_RANGE = [-2, 2]
+GRIEWANK_RANGE = [-2, 2]
+RASTRIGIN_RANGE = [-2, 2]
+SCHWEFEL_RANGE = [420.9687-2, 420.9687+2]
 
 NUMBER_OF_TREES = [2, 5, 10, 25, 50, 100, 200]
 
@@ -132,7 +133,8 @@ def random_forest_optimizer(function_name, function, values, max, number_of_tree
     scenario["noise"] = True
     scenario["normalize_inputs"] = True
     scenario["output_data_file"] = csv_dir
-    scenario["resume_optimization"] = RESUME
+
+    scenario["resume_optimization"] = False
     scenario["resume_optimization_data"] = csv_dir
 
     scenario["design_of_experiment"] = {}
@@ -181,7 +183,7 @@ def RF_hyperparameter_tuning(function):
     scenario["output_data_file"] = csv_dir
 
     scenario["resume_optimization"] = RESUME
-    scenario["resume_optimization_data"] = "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/RF_tuning/Optimizer/dim" + str(DIM) + "/optimizer_dim" + str(DIM) + ".csv"
+    scenario["resume_optimization_data"] = RESUME_CSV
     
     scenario["design_of_experiment"] = {}
     scenario["design_of_experiment"]["number_of_samples"] = 5   # d + 1
@@ -234,7 +236,7 @@ def write_description_file(f_name, number_of_trees, max_features, bootstrap, min
 # plot optimization results (regret)
 def plot_optimization(f_name):
     dirs = "Tests/" + "dim" + str(DIM) + "/" + f_name + "/"
-    json_dir = dirs + "test0/" + f_name + "_scenario.json"
+    json_dir = dirs + "test0/scenario.json" # + f_name + "_scenario.json"
     output_file = dirs + "regret.pdf"
 
     code = 'hm-plot-optimization-results -j ' + json_dir + ' -i '
@@ -255,3 +257,5 @@ def plot_optimization(f_name):
 
 
 RF_hyperparameter_tuning(random_forest)
+
+#for f in FUNCTIONS: plot_optimization(f[0])

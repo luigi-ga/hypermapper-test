@@ -1,0 +1,77 @@
+{
+    "application_name": "GP optimizer",
+    "models": {
+        "model": "gaussian_process"
+    },
+    "optimization_objectives": [
+        "value"
+    ],
+    "optimization_iterations": 40,
+    "time_budget": 2800,
+    "normalize_inputs": true,
+    "output_data_file": "Optimizer/dim2/optimizer_dim2.csv",
+    "resume_optimization": false,
+    "resume_optimization_data": "/mnt/d/Users/Luigi/Desktop/Universita/Tirocinio/GP_tuning/Optimizer/dim2/optimizer_dim2.csv",
+    "design_of_experiment": {
+        "number_of_samples": 5
+    },
+    "input_parameters": {
+        "acquisition_function": {
+            "parameter_type": "integer",
+            "values": [
+                0,
+                2
+            ]
+        },
+        "local_search_starting_points": {
+            "parameter_type": "integer",
+            "values": [
+                0,
+                1
+            ]
+        },
+        "local_search_random_points": {
+            "parameter_type": "integer",
+            "values": [
+                0,
+                4
+            ]
+        },
+        "log_transform_output": {
+            "parameter_type": "integer",
+            "values": [
+                0,
+                1
+            ]
+        },
+        "lengthscale_prior": {
+            "parameter_type": "integer",
+            "values": [
+                0,
+                1
+            ]
+        },
+        "epsilon_greedy_threshold": {
+            "parameter_type": "integer",
+            "values": [
+                0,
+                1
+            ]
+        },
+        "predict_noiseless": {
+            "parameter_type": "integer",
+            "values": [
+                0,
+                1
+            ]
+        },
+        "exploration_augmentation": {
+            "parameter_type": "integer",
+            "values": [
+                -5,
+                -2
+            ]
+        }
+    },
+    "acquisition_function": "EI"
+}
